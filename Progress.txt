@@ -1,0 +1,22 @@
+As of 10/28/2024
+
+	Managed to find where to download PRISM climate data. Downloaded average DAILY temperature data for every 4 by 4k grid into yearly folders from 1981-2019. Can download dewpoint as well. Started work on aggregation:
+		1.)Temp files in .bil format, raster data
+		2.)Extrapolate temp, transformation matrix, coordinate system, and the bounds
+		3.)Mask missing data (stored as-9999), take valid indices 
+		4.)Convert valid indices to coordinates 
+	Conversion to data frame is infeasible, 1 day of data takes about 15-60 seconds each. 481k rows for one day. Extract relevant info, perform necessary transformations, link to county boundaries and THEN aggregate. 
+
+	Current plan (to be verified by 1 file then by 1 year):
+		1.)Loop through every year, aggregate by month, every day
+		2.)Aggregate temperature to county: 
+			a.)How to determine county borders? use historic county lines? Use address?
+			b.) Struggling to find older county line borders, only until 2007?
+			c.) If center square point falls into county lines, belongs to county.
+			d.) for each county: find weighted average of daily temperature for all grid points within a county, where the values for each grid point are weighted by the inverse of the squared distance from the grid point to the county’s population centroid.
+				i.) Centroids only back to 2000
+
+		3.) Calculate daily heat index (will look at other vars first) for each county
+			a.) Use similar process in 2.) with dew point to calculate humidity 
+
+		
