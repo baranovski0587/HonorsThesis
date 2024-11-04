@@ -11,7 +11,7 @@ As of 10/28/2024
 		1.)Loop through every year, aggregate by month, every day
 		2.)Aggregate temperature to county: 
 			a.)How to determine county borders? use historic county lines? Use address?
-			b.) Struggling to find older county line borders, only until 2007?
+			b.) through 31 December 2000, need to find a way to tie out to 2001-2006 (in .shp file)
 			c.) If center square point falls into county lines, belongs to county.
 			d.) for each county: find weighted average of daily temperature for all grid points within a county, where the values for each grid point are weighted by the inverse of the squared distance from the grid point to the county’s population centroid.
 				i.) Centroids only back to 2000
@@ -19,4 +19,20 @@ As of 10/28/2024
 		3.) Calculate daily heat index (will look at other vars first) for each county
 			a.) Use similar process in 2.) with dew point to calculate humidity 
 
-		
+	Summary: Have the data(1981-2019), know generally how to work with that type of file. 
+	Next Steps: Decide how to aggregate; choose was sorts of calculations to make; tie out metrics 
+
+
+To do: look for controls
+
+As of 11/4/2024
+
+	Access to SILO for data storage and computing speed almost completed. 
+
+	Wrote script using GeoPandas to aggregate mean temp by count lines in given year. Currently working on general algorithm to classify an extreme heat day. (95th percentile methodology)
+	
+	General idea:
+		-Convert Mean Dew Point and Mean Temperature to Relative Humidity.
+		-Use Relative Humidity and Mean Temperature to Calculate Heat Index.
+	
+	What type of model also plays into this. currently researching climate econometrics. Can be determined later. current focus is on fully finalizing county level aggregation method for mean county temperature. 
